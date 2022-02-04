@@ -25,7 +25,15 @@ const brSquare = document.getElementById('sq8')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-
+tlSquare.addEventListener('click', handleClick)
+tmSquare.addEventListener('click', handleClick)
+trSquare.addEventListener('click', handleClick)
+mlSquare.addEventListener('click', handleClick)
+mmSquare.addEventListener('click', handleClick)
+mrSquare.addEventListener('click', handleClick)
+blSquare.addEventListener('click', handleClick)
+bmSquare.addEventListener('click', handleClick)
+brSquare.addEventListener('click', handleClick)
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -35,7 +43,7 @@ function init() {
   messageEl.textContent="It is Player 1's turn!"
   winner = null
   turn = 1
-  board = [null, 1, null, -1, 1, null, null, 1, null]
+  board = [null, null, null, null, null, null, null, null, null]
   render ()
 }
 
@@ -44,21 +52,18 @@ function render(){
   board.forEach(function(newSq, idx){
     let xoColor
     let xoLetter
-    console.log(newSq, idx)
   
   if(newSq === null){
     xoLetter = ''
     xoColor = 'gray'
   }
   if(newSq === 1){
-    console.log('one')
     xoLetter = 'X'
     allSquares[idx].textContent = 'X'
     xoColor = 'maroon'
     messageEl.style.color = 'maroon'
   }
   if(newSq === -1){
-    console.log('neg one')
     xoColor = 'darkblue'
     xoLetter = 'O'
     allSquares[idx].textContent = 'O'
@@ -83,13 +88,39 @@ function render(){
   }
 }
 
-const winningBoard = [
-  [board[0], board[1], board[2]]
-  [board[3], board[4], board[5]]
-  [board[6], board[7], board[8]]
-  [board[0], board[3], board[6]]
-  [board[1], board[4], board[7]]
-  [board[2], board[5], board[8]]
-  [board[0], board[4], board[8]]
-  [board[2], board[4], board[6]]
-]
+function handleClick(click){
+  let clickedSquare = parseInt(click.target.id.slice(2))
+  console.log(clickedSquare)
+  if(board[clickedSquare] || winner){
+    return
+  }
+  board[clickedSquare] = turn
+  console.log(board)
+  turn *= -1
+  console.log(turn)
+  winner = getWinner()
+  render()
+}
+
+function getWinner(){
+  console.log('getWinner')
+}
+
+
+
+
+
+
+
+
+
+// const winningBoards = [
+//   [board[0], board[1], board[2]]
+//   [board[3], board[4], board[5]]
+//   [board[6], board[7], board[8]]
+//   [board[0], board[3], board[6]]
+//   [board[1], board[4], board[7]]
+//   [board[2], board[5], board[8]]
+//   [board[0], board[4], board[8]]
+//   [board[2], board[4], board[6]]
+// ]
