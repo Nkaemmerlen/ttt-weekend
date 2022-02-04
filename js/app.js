@@ -35,7 +35,7 @@ function init() {
   messageEl.textContent="It is Player 1's turn!"
   winner = null
   turn = 1
-  board = [null, null, null, null, null, null, null, null, null]
+  board = [null, 1, null, -1, 1, null, null, 1, null]
   render ()
 }
 
@@ -53,6 +53,7 @@ function render(){
   if(newSq === 1){
     console.log('one')
     xoLetter = 'X'
+    allSquares[idx].textContent = 'X'
     xoColor = 'maroon'
     messageEl.style.color = 'maroon'
   }
@@ -60,17 +61,18 @@ function render(){
     console.log('neg one')
     xoColor = 'darkblue'
     xoLetter = 'O'
+    allSquares[idx].textContent = 'O'
     messageEl.style.color = 'darkblue'
   }
   if(winner === 1){
-    messageEl.style.background = xoColor
+    messageEl.style.background = 'maroon'
   } 
   if(winner === -1){
-    messageEl.style.background = xoColor
+    messageEl.style.background = 'darkblue'
   }
   
 })
-  if(turn){
+  if(!winner){
     messageEl.textContent = `It is ${turn === 1 ? "Player 1's" : "Player 2's"} turn, Please select and empty box!`
   }
   else if(winner === 'T'){
@@ -80,3 +82,14 @@ function render(){
     messageEl.textContent = `Congratulations!!! ${winner === 1 ? "player 1" : "Player 2"} has won!`
   }
 }
+
+const winningBoard = [
+  [board[0], board[1], board[2]]
+  [board[3], board[4], board[5]]
+  [board[6], board[7], board[8]]
+  [board[0], board[3], board[6]]
+  [board[1], board[4], board[7]]
+  [board[2], board[5], board[8]]
+  [board[0], board[4], board[8]]
+  [board[2], board[4], board[6]]
+]
