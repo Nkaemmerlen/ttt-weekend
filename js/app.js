@@ -3,7 +3,7 @@
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-let isWinner, usedBlock, turn
+let winner, usedBlock, turn
 let board = []
 
 
@@ -32,19 +32,54 @@ const brSquare = document.getElementById('sq8')
 init()
 
 function init() {
-  messageEl.textContent="It is Player X's turn"
-  isWinner = null
+  messageEl.textContent="It is Player 1's turn!"
+  winner = null
   turn = 1
-  board = new Array(9).fill(null)
-  const tlSquare = board[0]
-  const tmSquare = board[1]
-  const trSquare = board[2]
-  const mlSquare = board[3]
-  const mmSquare = board[4]
-  const mrSquare = board[5]
-  const blSquare = board[6]
-  const bmSquare = board[7]
-  const brSquare = board[8]
+  board = [null, null, null, null, null, null, null, null, null]
   render ()
 }
 
+
+function render(){
+  board.forEach(function(newSq, idx){
+    let xoColor
+    let xoLetter
+    console.log(newSq, idx)
+  
+  if(newSq === null){
+    xoLetter = ''
+    xoColor = 'gray'
+  }
+  if(newSq === 1){
+    console.log('one')
+    xoLetter = 'X'
+    xoColor = 'maroon'
+    messageEl.style.color = 'maroon'
+  }
+  if(newSq === -1){
+    console.log('neg one')
+    xoColor = 'darkblue'
+    xoLetter = 'O'
+    messageEl.style.color = 'darkblue'
+  }
+  if(winner === 1){
+    messageEl.style.background = xoColor
+  } 
+  if(winner === -1){
+    messageEl.style.background = xoColor
+  }
+  
+})
+  if(winner === null && turn ===1){
+    messageEl.textContent = "It is player 1's turn, Please select an empty box!"
+  }
+  else if(winner === null && turn === -1){
+    messageEl.textContent = "It is player 2's turn, Please select an empty box!"
+  }
+  else if(winner === 'T'){
+    messageEl.textContent = "Its a tie! nobody likes that.. Try again!"
+  }
+  else if(winner){
+    messageEl.textContent = `Congratulations!!! ${winner === 1 ? "player 1" : "Player 2"} Won!`
+  }
+}
