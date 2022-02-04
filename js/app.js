@@ -70,16 +70,13 @@ function render(){
   }
   
 })
-  if(winner === null && turn ===1){
-    messageEl.textContent = "It is player 1's turn, Please select an empty box!"
-  }
-  else if(winner === null && turn === -1){
-    messageEl.textContent = "It is player 2's turn, Please select an empty box!"
+  if(turn){
+    messageEl.textContent = `It is ${turn === 1 ? "Player 1's" : "Player 2's"} turn, Please select and empty box!`
   }
   else if(winner === 'T'){
     messageEl.textContent = "Its a tie! nobody likes that.. Try again!"
   }
   else if(winner){
-    messageEl.textContent = `Congratulations!!! ${winner === 1 ? "player 1" : "Player 2"} Won!`
+    messageEl.textContent = `Congratulations!!! ${winner === 1 ? "player 1" : "Player 2"} has won!`
   }
 }
