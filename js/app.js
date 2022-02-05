@@ -40,7 +40,7 @@ brSquare.addEventListener('click', handleClick)
 init()
 
 function init() {
-  messageEl.textContent="It is Player 1's turn!"
+  messageEl.textContent="Player 1 may begin the game!"
   winner = null
   turn = 1
   board = [null, null, null, null, null, null, null, null, null]
@@ -50,31 +50,22 @@ function init() {
 
 function render(){
   board.forEach(function(newSq, idx){
-    let xoColor
-    let xoLetter
-  
   if(newSq === null){
-    xoLetter = ''
-    xoColor = 'gray'
   }
   if(newSq === 1){
-    xoLetter = 'X'
     allSquares[idx].textContent = 'X'
-    xoColor = 'maroon'
     messageEl.style.color = 'maroon'
   }
   if(newSq === -1){
-    xoColor = 'darkblue'
-    xoLetter = 'O'
     allSquares[idx].textContent = 'O'
     messageEl.style.color = 'darkblue'
   }
-  if(winner === 1){
-    messageEl.style.background = 'maroon'
-  } 
-  if(winner === -1){
-    messageEl.style.background = 'darkblue'
-  }
+  // if(winner === 1){
+  //   messageEl.style.background = 'maroon'
+  // } 
+  // if(winner === -1){
+  //   messageEl.style.background = 'darkblue'
+  // }
   
 })
   if(!winner){
@@ -91,6 +82,7 @@ function render(){
 function handleClick(click){
   let clickedSquare = parseInt(click.target.id.slice(2))
   console.log(clickedSquare)
+  console.log(board[clickedSquare])
   if(board[clickedSquare] || winner){
     return
   }
@@ -100,10 +92,43 @@ function handleClick(click){
   console.log(turn)
   winner = getWinner()
   render()
+  getWinner()
 }
 
 function getWinner(){
   console.log('getWinner')
+  console.log(board[0])
+  console.log(board[1])
+  console.log(board[2])
+  let sum = Math.abs(-1 + -1 + -1)
+  console.log(sum)
+  let boardSum = Math.abs(board[0] + board[1] + board [2])
+  console.log(boardSum)
+  if (Math.abs(board[0] + board[1] + board[2]) === 3){
+    return board[0]
+  }
+  if (Math.abs(board[3] + board[4] + board[5]) === 3){
+    return board[3]
+  }
+  if (Math.abs(board[6] + board[7] + board[8]) === 3){
+    return board[6]
+  }
+  if (Math.abs(board[0] + board[3] + board[6]) === 3){
+    return board[0]
+  }
+  if (Math.abs(board[1] + board[4] + board[7]) === 3){
+    return board[1]
+  }
+  if (Math.abs(board[2] + board[5] + board[8]) === 3){
+    return board[2]
+  }
+  if (Math.abs(board[0] + board[4] + board[8]) === 3){
+    return board[0]
+  }
+  if (Math.abs(board[2] + board[4] + board[6]) === 3){
+    return board [2]
+  }
+  
 }
 
 
@@ -115,12 +140,12 @@ function getWinner(){
 
 
 // const winningBoards = [
-//   [board[0], board[1], board[2]]
-//   [board[3], board[4], board[5]]
-//   [board[6], board[7], board[8]]
-//   [board[0], board[3], board[6]]
-//   [board[1], board[4], board[7]]
-//   [board[2], board[5], board[8]]
-//   [board[0], board[4], board[8]]
+//   [board[0], board[1], board[2]],
+//   [board[3], board[4], board[5]],
+//   [board[6], board[7], board[8]],
+//   [board[0], board[3], board[6]],
+//   [board[1], board[4], board[7]],
+//   [board[2], board[5], board[8]],
+//   [board[0], board[4], board[8]],
 //   [board[2], board[4], board[6]]
 // ]
