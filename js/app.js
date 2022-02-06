@@ -3,7 +3,7 @@
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-let winner, usedBlock, turn
+let winner, turn
 let board = []
 
 
@@ -40,7 +40,7 @@ form.addEventListener("reset", init)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
-
+// init function for base state of the game
 function init() {
   messageEl.textContent= ""
   winner = null
@@ -50,7 +50,7 @@ function init() {
   render ()
 }
 
-
+// updating appearance depending on each factor of the game. turn/who selected which/ winner
 function render(){
   board.forEach(function(newSq, idx){
   if(newSq === null){
@@ -58,12 +58,10 @@ function render(){
   }
   if(newSq === 1){
     allSquares[idx].textContent = 'X'
-    // messageEl.style.color = 'rgb(252, 191, 73)'
     allSquares[idx].style.color = 'rgb(252, 191, 73)'
   }
   if(newSq === -1){
     allSquares[idx].textContent = 'O'
-    // messageEl.style.color = 'rgb(214, 40, 40)'
     allSquares[idx].style.color = 'rgb(214, 40, 40)'
 
   }
@@ -85,7 +83,7 @@ function render(){
     confetti.start(2000)
   }
 }
-
+// rotating turn order and linking the selected square idx
 function handleClick(click){
   let clickedSquare = parseInt(click.target.id.slice(-1))
   if(board[clickedSquare] || winner){
@@ -97,7 +95,7 @@ function handleClick(click){
   render()
   getWinner()
 }
-
+//the winning combos in absolute values to determine if there is a winner or tied game, or if the game is still in progress
 function getWinner(){
   if (Math.abs(board[0] + board[1] + board[2]) === 3){
     return board[0]
@@ -129,15 +127,6 @@ function getWinner(){
     return null
   }
 }
-
-
-
-
-
-
-
-
-
 // const winningBoards = [
 //   [board[0], board[1], board[2]],
 //   [board[3], board[4], board[5]],
