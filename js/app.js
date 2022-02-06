@@ -76,6 +76,7 @@ function render(){
   }
   else if(winner){
     messageEl.textContent = `Congratulations!!! ${winner === 1 ? "player 1" : "Player 2"} has won!`
+    confetti.start(2000)
   }
 }
 
