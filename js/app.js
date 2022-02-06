@@ -58,18 +58,24 @@ function render(){
   }
   if(newSq === 1){
     allSquares[idx].textContent = 'X'
-    messageEl.style.color = 'lightblue'
-    allSquares[idx].style.color = 'maroon'
+    // messageEl.style.color = 'rgb(252, 191, 73)'
+    allSquares[idx].style.color = 'rgb(252, 191, 73)'
   }
   if(newSq === -1){
     allSquares[idx].textContent = 'O'
-    messageEl.style.color = 'orange'
-    allSquares[idx].style.color = 'orange'
+    // messageEl.style.color = 'rgb(214, 40, 40)'
+    allSquares[idx].style.color = 'rgb(214, 40, 40)'
 
   }
 })
   if(!winner){
     messageEl.textContent = `It is ${turn === 1 ? "Player 1's" : "Player 2's"} turn, Please select and empty box!`
+  if(turn === 1){
+    messageEl.style.color = 'rgb(252, 191, 73)'
+  }
+  if(turn === -1){
+    messageEl.style.color = 'rgb(214, 40, 40)'
+  }
   }
   else if(winner === 'T'){
     messageEl.textContent = "Its a tie! nobody likes that.. Try again!"
