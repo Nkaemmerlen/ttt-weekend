@@ -1,5 +1,5 @@
 body {
-    background-color: gray;
+    background-color: rgb(12, 12, 12);
 	/* Use a system font, if none are available use an available sans-sarif   font */
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -14,12 +14,24 @@ section.board {
   grid-template-rows: repeat(3, 10vmin);
   grid-template-columns: repeat(3, 10vmin);
   grid-gap: 0vmin;
-  
+  text-align: center;
+
 }
 
 div {
-  border: 3px solid black;
+  border: 3px solid blue;
   font-size: 8vmin;
   text-align: center;
   vertical-align: middle;
+}
+#message {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  color:rgb(83, 169, 175)
+}
+div:hover {
+  background-color: rgb(83, 169, 175);
 }

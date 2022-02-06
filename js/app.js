@@ -20,6 +20,7 @@ const mrSquare = document.getElementById('sq5')
 const blSquare = document.getElementById('sq6')
 const bmSquare = document.getElementById('sq7')
 const brSquare = document.getElementById('sq8')
+const form = document.querySelector('form')
 
 
 
@@ -34,15 +35,17 @@ mrSquare.addEventListener('click', handleClick)
 blSquare.addEventListener('click', handleClick)
 bmSquare.addEventListener('click', handleClick)
 brSquare.addEventListener('click', handleClick)
+form.addEventListener("reset", init)
 
 
 /*-------------------------------- Functions --------------------------------*/
 init()
 
 function init() {
-  messageEl.textContent="Player 1 may begin the game!"
+  messageEl.textContent= ""
   winner = null
   turn = 1
+  allSquares.textContent = ""
   board = [null, null, null, null, null, null, null, null, null]
   render ()
 }
@@ -51,22 +54,19 @@ function init() {
 function render(){
   board.forEach(function(newSq, idx){
   if(newSq === null){
+    allSquares[idx].textContent = ''
   }
   if(newSq === 1){
     allSquares[idx].textContent = 'X'
-    messageEl.style.color = 'maroon'
+    messageEl.style.color = 'lightblue'
+    allSquares[idx].style.color = 'maroon'
   }
   if(newSq === -1){
     allSquares[idx].textContent = 'O'
-    messageEl.style.color = 'darkblue'
+    messageEl.style.color = 'orange'
+    allSquares[idx].style.color = 'orange'
+
   }
-  // if(winner === 1){
-  //   messageEl.style.background = 'maroon'
-  // } 
-  // if(winner === -1){
-  //   messageEl.style.background = 'darkblue'
-  // }
-  
 })
   if(!winner){
     messageEl.textContent = `It is ${turn === 1 ? "Player 1's" : "Player 2's"} turn, Please select and empty box!`
@@ -80,30 +80,18 @@ function render(){
 }
 
 function handleClick(click){
-  let clickedSquare = parseInt(click.target.id.slice(2))
-  console.log(clickedSquare)
-  console.log(board[clickedSquare])
+  let clickedSquare = parseInt(click.target.id.slice(-1))
   if(board[clickedSquare] || winner){
     return
   }
   board[clickedSquare] = turn
-  console.log(board)
   turn *= -1
-  console.log(turn)
   winner = getWinner()
   render()
   getWinner()
 }
 
 function getWinner(){
-  console.log('getWinner')
-  console.log(board[0])
-  console.log(board[1])
-  console.log(board[2])
-  let sum = Math.abs(-1 + -1 + -1)
-  console.log(sum)
-  let boardSum = Math.abs(board[0] + board[1] + board [2])
-  console.log(boardSum)
   if (Math.abs(board[0] + board[1] + board[2]) === 3){
     return board[0]
   }
@@ -128,7 +116,11 @@ function getWinner(){
   if (Math.abs(board[2] + board[4] + board[6]) === 3){
     return board [2]
   }
-  
+  if (!board.includes(null)){
+    return 'T'
+  } else {
+    return null
+  }
 }
 
 
